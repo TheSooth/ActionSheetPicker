@@ -30,6 +30,7 @@
 @class ActionSheetStringPicker;
 typedef void(^ActionStringDoneBlock)(ActionSheetStringPicker *picker, NSInteger selectedIndex, id selectedValue);
 typedef void(^ActionStringCancelBlock)(ActionSheetStringPicker *picker);
+typedef ActionStringDoneBlock ActionStringSelectionBlock;
 
 @interface ActionSheetStringPicker : AbstractActionSheetPicker <UIPickerViewDelegate, UIPickerViewDataSource>
 /* Create and display an action sheet picker. The returned picker is autoreleased. 
@@ -45,11 +46,14 @@ typedef void(^ActionStringCancelBlock)(ActionSheetStringPicker *picker);
 
 
 
++ (id)showPickerWithTitle:(NSString *)title rows:(NSArray *)strings initialSelection:(NSInteger)index doneBlock:(ActionStringDoneBlock)doneBlock cancelBlock:(ActionStringCancelBlock)cancelBlock selectionBlock:(ActionStringSelectionBlock)selectionBlock origin:(id)origin;
+
 + (id)showPickerWithTitle:(NSString *)title rows:(NSArray *)strings initialSelection:(NSInteger)index doneBlock:(ActionStringDoneBlock)doneBlock cancelBlock:(ActionStringCancelBlock)cancelBlock origin:(id)origin;
 
-- (id)initWithTitle:(NSString *)title rows:(NSArray *)strings initialSelection:(NSInteger)index doneBlock:(ActionStringDoneBlock)doneBlock cancelBlock:(ActionStringCancelBlock)cancelBlockOrNil origin:(id)origin;
+- (id)initWithTitle:(NSString *)title rows:(NSArray *)strings initialSelection:(NSInteger)index doneBlock:(ActionStringDoneBlock)doneBlock cancelBlock:(ActionStringCancelBlock)cancelBlockOrNil selectionBlock:(ActionStringSelectionBlock)selectionBlock origin:(id)origin;
 
 @property (nonatomic, copy) ActionStringDoneBlock onActionSheetDone;
 @property (nonatomic, copy) ActionStringCancelBlock onActionSheetCancel;
+@property (nonatomic, copy) ActionStringSelectionBlock onSelection;
 
 @end
