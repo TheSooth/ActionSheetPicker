@@ -45,6 +45,15 @@
     return picker;
 }
 
++ (id)showPickerWithTitle:(NSString *)title rows:(NSArray *)strings initialSelection:(NSInteger)index doneBlock:(ActionStringDoneBlock)doneBlock cancelBlock:(ActionStringCancelBlock)cancelBlock origin:(id)origin
+{
+    ActionSheetStringPicker * picker = [[ActionSheetStringPicker alloc] initWithTitle:title rows:strings initialSelection:index doneBlock:doneBlock cancelBlock:cancelBlock selectionBlock:nil origin:origin];
+    
+    [picker showActionSheetPicker];
+    
+    return picker;
+}
+
 - (id)initWithTitle:(NSString *)title rows:(NSArray *)strings initialSelection:(NSInteger)index doneBlock:(ActionStringDoneBlock)doneBlock cancelBlock:(ActionStringCancelBlock)cancelBlockOrNil selectionBlock:(ActionStringSelectionBlock)selectionBlock origin:(id)origin {
     self = [self initWithTitle:title rows:strings initialSelection:index target:nil successAction:nil cancelAction:nil origin:origin];
     if (self) {
@@ -88,7 +97,7 @@
     return stringPicker;
 }
 
-- (void)notifyTarget:(id)target didSucceedWithAction:(SEL)successAction origin:(id)origin {    
+- (void)notifyTarget:(id)target didSucceedWithAction:(SEL)successAction origin:(id)origin {
     if (self.onActionSheetDone) {
         _onActionSheetDone(self, self.selectedIndex, [self.data objectAtIndex:self.selectedIndex]);
         return;
