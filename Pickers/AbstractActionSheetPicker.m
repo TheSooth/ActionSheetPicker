@@ -128,6 +128,7 @@
 #pragma mark - Actions
 
 - (void)showActionSheetPicker {
+    [[UIApplication sharedApplication] sendAction:@selector(resignFirstResponder) to:Nil from:nil forEvent:nil];
     UIView *masterView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.viewSize.width, 260)];    
     UIToolbar *pickerToolbar = [self createPickerToolbarWithTitle:self.title];
     [pickerToolbar setBarStyle:UIBarStyleBlackTranslucent];
